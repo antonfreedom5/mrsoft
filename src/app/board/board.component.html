@@ -1,0 +1,54 @@
+<div class="messaging mt-3">
+  <div class="inbox_information">
+    <div class="inbox_people">
+      <div class="headind_search">
+        <div class="srch_bar">
+          <div class="stylish-input-group">
+            <input type="text" class="search-bar" placeholder="Search" [(ngModel)]="searchText">
+          </div>
+        </div>
+      </div>
+      <div class="inbox_chat scroll">
+        <div [ngClass]="{active_chat:catGeneral.selected}" class="chat_list"
+             *ngFor="let catGeneral of catsGeneral | filter:searchText" (click)="selectPerson(catGeneral)">
+          <div class="chat_people">
+            <div class="chat_ib">
+              <div class="row">
+                <div class="col"><h5>{{catGeneral.name}}</h5></div>
+                <div class="col-1 close"><img
+                  src="https://icons.iconarchive.com/icons/custom-icon-design/mono-general-1/512/delete-icon.png"
+                  style="width: 15px;" title="Delete" (click)="deletePerson(catGeneral)"></div>
+              </div>
+              <p>{{catGeneral.shortInfo}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="delete_chat" *ngFor="let catGeneral of catsGeneralDeleted | filter:searchText">
+          <div class="chat_people">
+            <div class="chat_ib">
+              <div class="row">
+                <div class="col"><h5><span>[Deleted]</span> {{catGeneral.name}}</h5></div>
+                <div class="col-1 close"><img
+                  src="https://cdn.iconscout.com/icon/free/png-256/return-arrow-457870.png"
+                  style="width: 20px;" title="Return" (click)="returnPerson(catGeneral)"></div>
+              </div>
+              <p>{{catGeneral.dateOfDeleted | date:'short' }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="more_information">
+      <div class="row" *ngIf="CatGeneralSelected">
+        <div class="col">
+          <h1 class="display-4">{{CatGeneralSelected.name}}</h1>
+          <h4>{{CatGeneralSelected.shortInfo}}</h4>
+          <p>{{catMoreSelected.bio}}</p>
+        </div>
+        <div class="col-4 pt-3">
+          <img [src]="picSelected">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
